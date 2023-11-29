@@ -9,14 +9,14 @@ class InternetUGM {
     private:
     const char* ssid = "UGM-Hotspot";
     const char* url  = "https://sso.ugm.ac.id/cas/login?service=https://internet.ugm.ac.id/sso/login";
-    char* username;
-    char* password;
+    String username;
+    String password;
     WiFiClientSecure client;
 
     public:
-    InternetUGM(WiFiClientSecure &client, char* username, char* password);
+    InternetUGM(String username, String password);
     ~InternetUGM();
-    int begin(HTTPClient &http);
+    int begin(WiFiClientSecure &client, HTTPClient &http);
 };
 
 #endif
