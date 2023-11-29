@@ -14,11 +14,9 @@ InternetUGM inet(username, password);
 void setup(){
 	Serial.begin(115200);
 	int responseCode = inet.begin(wifi, http);
-	if (responseCode != 200) {
-		Serial.println("Error Code: ");
-		Serial.println(responseCode);
-	}
+	Serial.println(responseCode);
 
+	// Test connection to Internet
 	http.begin(wifi, "https://httpbin.org/get");
 	http.GET();
 	Serial.println(http.getString());
@@ -27,5 +25,5 @@ void setup(){
 
 void loop(){
 	// Put your loop code here
-
+	
 }
