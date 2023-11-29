@@ -4,21 +4,25 @@
 #include <HTTPClient.h>
 #include "internet.h"
 
-// Put your email (without ugm.ac.id) and passwords in here
-char* username = "";
-char* password = "";
+String username = "";
+String password = "";
 
 WiFiClientSecure wifi;
 HTTPClient http;
-InternetUGM inet(wifi, username, password);
+InternetUGM inet(username, password);
 
 void setup(){
 	Serial.begin(115200);
-	int responseCode = inet.begin(http);
+	int responseCode = inet.begin(wifi, http);
 	if (responseCode != 200) {
 		Serial.println("Error Code: ");
 		Serial.println(responseCode);
 	}
+
+	http.begin(wifi, "https://httpbin.org/get");
+	http.GET();
+	Serial.println(http.getString());
+	http.end();
 }
 
 void loop(){
